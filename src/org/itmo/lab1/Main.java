@@ -25,7 +25,7 @@ public class Main {
     }
     public static void viewResultTask3() {
         int number = 10500;
-        int result = (number/10)/10;
+        double result = ((double)number/10)/10;
         System.out.println(result);
     }
     public static void viewResultTask4() {
