@@ -1,15 +1,18 @@
 package org.itmo.lab4;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Arrays;
 
 public class Main {
+    public static int[] m = new int[5];
+    public static int[] newArray;
     public static int a;
     public static int b;
     public static int c;
-    public static int[] m = new int[5];
-    public static int[] newArray;
+
 
     public static void main(String[] args) {
         viewResultOfTask1();
@@ -19,24 +22,31 @@ public class Main {
         viewResultOfTask5();
         viewResultOfTask6();
         viewResultOfTask21();
-        viewResultOfTask22();
+        viewResultOfTask22(true);
         viewResultOfTask23();
         viewResultOfTask24();
         viewResultOfTask25();
     }
 
-    public static void viewResultOfTask1() {
-        for (double i = 1; i < 100; i++) {
+    public static ArrayList findOdd(int limit) {
+        ArrayList<Integer> oddNumbers = new ArrayList<>();
+        for (double i = 1; i < limit; i++) {
             if (i % 2 != 0) {
-                System.out.println((int) i);
+                oddNumbers.add((int) i);
             }
         }
+        return oddNumbers;
     }
 
-    public static void viewResultOfTask2() {
-        StringBuilder divisibleBy3 = new StringBuilder("Делится на 3: ");
-        StringBuilder divisibleBy5 = new StringBuilder("Делится на 5: ");
-        StringBuilder divisibleBy3And5 = new StringBuilder("Делится на 3 и на 5: ");
+    public static void viewResultOfTask1() {
+        ArrayList<Integer> arrayOfOddNumbers = findOdd(100);
+        String result = arrayOfOddNumbers.toString();
+        result = result.replaceAll("[\\\\\\[\\]]", "");
+        result = result.replaceAll(", ", "\n");
+        System.out.println(result);
+    }
+
+    public static void findDivisible(StringBuilder divisibleBy3, StringBuilder divisibleBy5, StringBuilder divisibleBy3And5) {
         boolean first3 = true;
         boolean first5 = true;
         boolean first35 = true;
@@ -57,13 +67,32 @@ public class Main {
                 first5 = false;
             }
         }
+    }
+
+
+    public static void viewResultOfTask2() {
+        StringBuilder divisibleBy3 = new StringBuilder("Делится на 3: ");
+        StringBuilder divisibleBy5 = new StringBuilder("Делится на 5: ");
+        StringBuilder divisibleBy3And5 = new StringBuilder("Делится на 3 и на 5: ");
+        findDivisible(divisibleBy3, divisibleBy5, divisibleBy3And5);
         System.out.println(divisibleBy3);
         System.out.println(divisibleBy5);
         System.out.println(divisibleBy3And5);
     }
 
+    public static int sum(int a, int b) {
+        return (a + b);
+    }
+
+    public static boolean toCompare(int a, int b, int c, int type) {
+        if (type == 1) {
+            return (c == sum(a, b));
+        } else {
+            return (b > a && c > b);
+        }
+    }
+
     public static void еnterValues() {
-        System.out.println("Введите 3 целых числа");
         Scanner scanner = new Scanner(System.in);
         a = scanner.nextInt();
         b = scanner.nextInt();
@@ -71,21 +100,23 @@ public class Main {
     }
 
     public static void viewResultOfTask3() {
+        System.out.println("Введите 3 целых числа");
         еnterValues();
-        System.out.println(a + b);
-        System.out.println(c == a + b);
-
+        int aPlusB = sum(a, b);
+        Boolean compareC = toCompare(a, b, c, 1);
+        System.out.println(aPlusB);
+        System.out.println(compareC);
     }
 
     public static void viewResultOfTask4() {
         еnterValues();
-        System.out.println(a + b);
-        System.out.println(b > a && c > b);
+        int aPlusB = sum(a, b);
+        Boolean compareC = toCompare(a, b, c, 2);
+        System.out.println(aPlusB);
+        System.out.println(compareC);
     }
 
-    public static void generateAnArrayOfNumbers() {
-        m = new int[5]; //перед использования массива почистим его
-        StringBuilder strArray = new StringBuilder("array = ");
+    public static void generateAnArrayOfNumbers(int[] m, StringBuilder strArray) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите в МАССИВ 5 чисел");
         for (int i = 0; i < 5; i++) {
@@ -93,22 +124,19 @@ public class Main {
             if (i != 0) strArray.append(", ");
             strArray.append(m[i]);
         }
-        System.out.println(strArray);
     }
 
-    public static void viewResultOfTask5() {
-        generateAnArrayOfNumbers();
-        Boolean isFound = null;
+    public static Boolean find3(int[] m) {
+        Boolean isFound = false;
         if (m[0] == 3 || m[m.length - 1] == 3) {
             isFound = true;
         } else {
             isFound = false;
         }
-        System.out.println(isFound);
+        return isFound;
     }
 
-    public static void viewResultOfTask6() {
-        generateAnArrayOfNumbers();
+    public static Boolean find1Or3(int[] m) {
         Boolean isFound = false;
         for (int i = 0; i < 5; i++) {
             if (m[i] == 1 || m[i] == 3) {
@@ -116,11 +144,28 @@ public class Main {
                 break;
             }
         }
+        return isFound;
+    }
+
+    public static void viewResultOfTask5() {
+
+        int[] m = new int[5];
+        StringBuilder strArray = new StringBuilder("array = ");
+        generateAnArrayOfNumbers(m, strArray);
+        Boolean isFound = find3(m);
+        System.out.println(strArray);
         System.out.println(isFound);
     }
 
-    public static void viewResultOfTask21() {
-        generateAnArrayOfNumbers();
+    public static void viewResultOfTask6() {
+        int[] m = new int[5];
+        StringBuilder strArray = new StringBuilder("array = ");
+        generateAnArrayOfNumbers(m, strArray);
+        Boolean isFound = find1Or3(m);
+        System.out.println(isFound);
+    }
+
+    private static String checkSortOfgArray(int[] m) {
         String stringOfSorted = "ОК";
         for (int i = 0; i < 5; i++) {
             if (i > 0 && m[i] < m[i - 1]) {
@@ -128,59 +173,66 @@ public class Main {
                 break;
             }
         }
+        return stringOfSorted;
+    }
+
+
+    public static void viewResultOfTask21() {
+        int[] m = new int[5];
+        StringBuilder strArray = new StringBuilder("array = ");
+        generateAnArrayOfNumbers(m, strArray);
+        String stringOfSorted = checkSortOfgArray(m);
         System.out.println(stringOfSorted);
     }
 
-    public static void generateAnArrayOfTheSpecifiedLength(int length) {
-        newArray = new int[length];
-        StringBuilder strArray = new StringBuilder("Result: [");
+    public static int[] generateAnArrayOfTheSpecifiedLength(int length, Boolean showResult) {
+        int[] newArray = new int[length];
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Array length: " + length);
         for (int i = 0; i < length; i++) {
             newArray[i] = scanner.nextInt();
-            if (i != 0) strArray.append(", ");
-            strArray.append(newArray[i]);
         }
-        strArray.append("]");
+        if (showResult == true) {
+            System.out.println("Result: " + Arrays.toString(newArray));
+        }
+        return newArray;
 
-        System.out.println(strArray);
     }
 
-    public static void viewResultOfTask22() {
+    public static int[] viewResultOfTask22(Boolean showResult) {
         int length;
         System.out.println("Введите длину массива целых чисел");
         Scanner scanner = new Scanner(System.in);
         length = scanner.nextInt();
-        generateAnArrayOfTheSpecifiedLength(length);
+        System.out.println("Array length: " + length);
+        int[] newArray = generateAnArrayOfTheSpecifiedLength(length, showResult);
+        return newArray;
     }
 
-    public static void showArray(int number) {
-        String strNumber = "";
-        if (number > 0) {
-            strNumber = "" + number;
-        }
-        String strArray = "Array " + strNumber + ": [";
-        for (int i = 0; i < newArray.length; i++) {
-            if (i != 0) strArray = strArray + ", ";
-            strArray = strArray + newArray[i];
-        }
-        strArray = strArray + "]";
-        System.out.println(strArray);
-    }
+//    public static void showArray(int number) {
+//        String strNumber = "";
+//        if (number > 0) {
+//            strNumber = "" + number;
+//        }
+//        String strArray = "Array " + strNumber + ": [";
+//        for (int i = 0; i < newArray.length; i++) {
+//            if (i != 0) strArray = strArray + ", ";
+//            strArray = strArray + newArray[i];
+//        }
+//        strArray = strArray + "]";
+//        System.out.println(strArray);
+//    }
 
     public static void viewResultOfTask23() {
         System.out.println("Поменяем местами первый и последний элемент массива, но для начала сформируем массив");
-        viewResultOfTask22();
-        showArray(1);
+        newArray = viewResultOfTask22(false);
+        System.out.println("Array 1: " + Arrays.toString(newArray));
         int valueA = newArray[0];
         newArray[0] = newArray[newArray.length - 1];
         newArray[newArray.length - 1] = valueA;
-        showArray(2);
+        System.out.println("Array 2: " + Arrays.toString(newArray));
     }
 
-    public static void viewResultOfTask24() {
-        System.out.println("Найдем первое уникальное в массиве число, но для начала сформируем массив");
-        viewResultOfTask22();
+    public static Integer findFirstUniqueNumber(int[] newArray) {
         Boolean uniqueNumber;
         for (int i = 0; i < newArray.length; i++) {
             uniqueNumber = true;
@@ -193,9 +245,21 @@ public class Main {
                 }
             }
             if (uniqueNumber == true) {
-                System.out.println("Первое уникальное число " + newArray[i]);
-                break;
+                return (Integer) newArray[i];
             }
+        }
+        return (Integer)null;
+    }
+
+    public static void viewResultOfTask24() {
+        System.out.println("Найдем первое уникальное в массиве число, но для начала сформируем массив");
+        int[] newArray = viewResultOfTask22(false);
+        Integer firstUniqueNumber = findFirstUniqueNumber(newArray);
+        if (firstUniqueNumber == null){
+            System.out.println("Уникальных чисел нет");
+        }
+        else {
+            System.out.println("Первое уникальное число " + firstUniqueNumber);
         }
     }
 
