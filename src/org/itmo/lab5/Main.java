@@ -11,16 +11,9 @@ public class Main {
         viewResultOfTask5();
     }
 
-    public static void viewResultOfTask1() {
-        String text = "Lorem Ipsum — это просто фиктивный текст, используемый в полиграфической и издательской индустрии." +
-                " Lorem Ipsum является стандартным фиктивным текстом в этой отрасли с 1500-х годов, когда неизвестный печатник" +
-                " взял набор шрифтов и перемешал их, чтобы создать образец шрифтов. Он сохранился не только на протяжении" +
-                " пяти веков, но и пережил переход к электронной верстке, оставаясь по сути неизменным. Он стал популярен" +
-                " в 1960-х годах с выпуском листов Letraset, содержащих отрывки Lorem Ipsum, а в последнее время — благодаря" +
-                " программам настольной издательской системы, таким как Aldus PageMaker, включающим версии Lorem Ipsum.";
-        // Удалbv всего, кроме букв, цифр и пробелов:
+    public static String findLongestWord(String text) {
+        // Удалю все, кроме букв, цифр и пробелов:
         String textOnlyLettersAndNumbers = text.replaceAll("[^\\p{L}\\p{Nd}\\s]", "");
-
         String longestWord = "";
         String[] words = textOnlyLettersAndNumbers.split(" ");
         for (String word : words) {
@@ -28,50 +21,79 @@ public class Main {
                 longestWord = word;
             }
         }
+        return longestWord;
+    }
+
+    public static void viewResultOfTask1() {
+        Scanner scanner = new Scanner(System.in);
+//        String text = "Lorem Ipsum — это просто фиктивный текст, используемый в полиграфической и издательской индустрии." +
+//                " Lorem Ipsum является стандартным фиктивным текстом в этой отрасли с 1500-х годов, когда неизвестный печатник" +
+//                " взял набор шрифтов и перемешал их, чтобы создать образец шрифтов. Он сохранился не только на протяжении" +
+//                " пяти веков, но и пережил переход к электронной верстке, оставаясь по сути неизменным. Он стал популярен" +
+//                " в 1960-х годах с выпуском листов Letraset, содержащих отрывки Lorem Ipsum, а в последнее время — благодаря" +
+//                " программам настольной издательской системы, таким как Aldus PageMaker, включающим версии Lorem Ipsum.";
+        System.out.println("Введите текст:");
+        String text = scanner.nextLine();
+        String longestWord = findLongestWord(text);
         System.out.println(text);
         System.out.println("Самое длиное слово текста - " + longestWord);
     }
 
-    public static void viewResultOfTask2() {
-        Boolean IsPalindrom = true;
-        Scanner scanner = new Scanner(System.in);
-        String word = scanner.nextLine();
+    public static Boolean wordIsPalindrom(String word) {
+        Boolean isPalindrom = true;
         char[] letters = word.toCharArray();
         for (int i = 0; i < letters.length; i++) {
             if (letters[letters.length - 1 - i] != letters[i]) {
-                IsPalindrom = false;
+                isPalindrom = false;
                 break;
             }
         }
-        System.out.println("Слово " + word + ((IsPalindrom == true) ? " " : " НЕ ") + "является палиндромом");
+        return isPalindrom;
+    }
+
+    public static void viewResultOfTask2() {
+        System.out.println("Введите слово для проверки, является ли оно палиндромом:");
+        Scanner scanner = new Scanner(System.in);
+        String word = scanner.nextLine();
+        Boolean isPalindrom = wordIsPalindrom(word);
+        System.out.println("Слово " + word + ((isPalindrom == true) ? " " : " НЕ ") + "является палиндромом");
     }
 
     public static void viewResultOfTask3() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите текст для проверки");
         String badText = scanner.nextLine();
-        String goodText = replaceByaka(badText);
+        System.out.println("Введите запрещеные цензурой слова");
+        String badWords = scanner.nextLine();
+        String goodText = replacebadText(badText, badWords);
         System.out.println(goodText);
     }
 
-    public static String replaceByaka(String text) {
+    public static String replacebadText(String text, String badWords) {
         if (text == null) {
             return null;
         }
-        return text.replaceAll("(?i)бяка", "[вырезано цензурой]");
+        return text.replaceAll(badWords, "[вырезано цензурой]");
+    }
+
+
+    public static int countNumberOfOccurrences(String text1, String text2) {
+        text1 = "Начало" + text1 + "Конец";
+        String[] partWithoutSubString = text1.split(text2);
+        int numberOfOccurrences = partWithoutSubString.length - 1;
+        return numberOfOccurrences;
     }
 
     public static void viewResultOfTask4() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите строку, в которой нужно найти подстроку");
         String text1 = scanner.nextLine();
-        text1 = "Начало" + text1 + "Конец";
+        System.out.println("Введите подстроку, которую будем искать");
         String text2 = scanner.nextLine();
-        String[] partWithoutSubString = text1.split(text2);
-        System.out.println("Количество вхождений строки " + text2 + " в строку " + text2 + " равняется " + (partWithoutSubString.length - 1));
+        int numberOfOccurrences = countNumberOfOccurrences(text1,text2);
+        System.out.println("Количество вхождений строки " + text2 + " в строку " + text1 + " равняется " + numberOfOccurrences);
     }
-
-    public static void viewResultOfTask5() {
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
+    public static String invertWordsInString(String text) {
         String[] words = text.split(" ");
         String newText = "";
         for (String word : words) {
@@ -82,6 +104,13 @@ public class Main {
             }
             newText = newText + ((newText != "") ? " " : "") + newWord;
         }
+        return newText;
+    }
+    public static void viewResultOfTask5() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите строку, буквы слов в которой нужно инвертировать");
+        String text = scanner.nextLine();
+        String newText = invertWordsInString(text);
         System.out.println(newText);
     }
 }

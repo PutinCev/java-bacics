@@ -109,6 +109,7 @@ public class Main {
     }
 
     public static void viewResultOfTask4() {
+        System.out.println("Введите 3 целых числа");
         еnterValues();
         int aPlusB = sum(a, b);
         Boolean compareC = toCompare(a, b, c, 2);
