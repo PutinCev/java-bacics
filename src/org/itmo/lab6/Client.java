@@ -15,6 +15,7 @@ class Client extends Man implements BankService {
         System.out.println();
 
     }
+
     @Override
     public void showBankInfo() {
         System.out.println("Информация о банке клиента:");

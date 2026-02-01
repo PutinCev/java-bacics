@@ -13,7 +13,6 @@ public class UserProfile {
         System.out.print("Введите ваш возраст: ");
         return scanner.nextInt();
     }
-
     public String getName() {
         System.out.print("Введите ваше имя: ");
         scanner.nextLine(); // Очистка буфера

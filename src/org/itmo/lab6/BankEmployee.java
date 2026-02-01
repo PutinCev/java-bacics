@@ -9,7 +9,6 @@ class BankEmployee extends Man implements BankService {
         this.nameOfBank = nameOfBank;
         this.jobTitle = jobTitle;
     }
-
     @Override
     public void vivodInformatsii() {
         System.out.println("Работник банка: " + surname + " " + firstName);

@@ -9,7 +9,6 @@ public class UserAccount extends UserProfile {
         scanner.nextLine(); // Очистка буфера
         return scanner.nextLine();
     }
-
     public String getEmail() {
         System.out.print("Введите ваш email: ");
         return scanner.nextLine();

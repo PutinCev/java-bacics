@@ -31,7 +31,7 @@ public class Main {
         Naslednik naslednik = new Naslednik();
         naslednik.vivodChisla();
 
-        //Задание №5
+        //Задание №5.
         UserAccount user = new UserAccount();
         user.displayUserInfo();
 

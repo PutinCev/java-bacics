@@ -25,7 +25,6 @@ public class Truck extends Car {
         System.out.println("Количество колес: " + numberOfWheels);
         System.out.println("Максимальный вес: " + weightLimit + "кг");
     }
-
     // Геттеры и сеттеры
     public int getNumberOfWheels() {
         return numberOfWheels;

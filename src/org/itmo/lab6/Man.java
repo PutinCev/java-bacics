@@ -10,7 +10,7 @@ abstract class Man {
     public String getFirstName() {
         return firstName;
     }
-
+    //
     public String getSurname() {
         return surname;
     }
