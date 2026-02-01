@@ -32,7 +32,10 @@ public class Main {
         String badText = scanner.nextLine();
         System.out.println("Введите запрещеные цензурой слова");
         String badWords = scanner.nextLine();
-        String goodText = replacebadText(badText, badWords);
+        System.out.println("Введите текст для замены");
+        String textForReplace = scanner.nextLine();
+        //String textForReplace = "[вырезано цензурой]";
+        String goodText = replacebadText(badText, badWords, textForReplace);
         System.out.println(goodText);
 
         //4.	Найти количество вхождений одной (являющейся подстрокой) в другую
@@ -80,11 +83,11 @@ public class Main {
     }
 
     //3.	Метод, заменяющий в тексте все вхождения слова «бяка» на «[вырезано цензурой]»
-    public static String replacebadText(String text, String badWords) {
+    public static String replacebadText(String text, String badWords, String textForReplace) {
         if (text == null) {
             return null;
         }
-        return text.replaceAll(badWords, "[вырезано цензурой]");
+        return text.replaceAll(badWords, textForReplace);
     }
 
     //4.	Метод поиска количества вхождений одной строки в другую
