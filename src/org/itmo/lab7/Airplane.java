@@ -3,35 +3,35 @@ package org.itmo.lab7;
 public class Airplane {
 
     private String model;
-    private Krylo leftKrylo;
-    private Krylo rightKrylo;
+    private Wing leftWing;
+    private Wing rightWing;
 
     // Конструктор самолета
-    public Airplane(String model) {
+    public Airplane(String model){
         this.model = model;
     }
 
     // Метод для отображения информации о самолете
     public void showInfo() {
         System.out.println("Самолет: " + model);
-        if (leftKrylo != null) {
-            leftKrylo.showWeight();
+        if (leftWing != null) {
+            leftWing.showWeight();
         }
-        if (rightKrylo != null) {
-            rightKrylo.showWeight();
+        if (rightWing != null) {
+            rightWing.showWeight();
         }
-        if (leftKrylo != null && rightKrylo != null) {
+        if (leftWing != null && rightWing != null) {
             System.out.println("Общий вес крыльев: " +
-                    (leftKrylo.getWeight() + rightKrylo.getWeight()) + " кг");
+                    (leftWing.getWeight() + rightWing.getWeight()) + " кг");
         }
         System.out.println();
     }
 
-    class Krylo {
+    class Wing {
         private int weight; // вес крыла
         private String side; // сторона (левое/правое)
 
-        public Krylo(int weight, String side) {
+        public Wing(int weight, String side) {
             this.weight = weight;
             this.side = side;
         }

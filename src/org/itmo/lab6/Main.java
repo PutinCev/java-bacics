@@ -28,16 +28,12 @@ public class Main {
         truck.newWheels(12);
 
         //Задание №4
-        Naslednik naslednik = new Naslednik();
-        naslednik.vivodChisla();
+        HeirСlass heirСlass = new HeirСlass();
+        heirСlass.vivodChisla();
 
         //Задание №5.
         UserAccount user = new UserAccount();
         user.displayUserInfo();
-
-        System.out.println("\nДемонстрация переопределенного метода:");
-        String name = user.getName();
-        System.out.println("Полученное имя: " + name);
 
     }
 }

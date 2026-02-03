@@ -9,13 +9,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите вес левого крыла");
         int WLK = scanner.nextInt();
-        Airplane.Krylo kryloLeft = sam3.new Krylo(WLK, "левое");
+        Airplane.Wing wingLeft = sam3.new Wing(WLK, "левое");
         System.out.println("Введите вес правого крыла");
         int WRK = scanner.nextInt();
-        Airplane.Krylo kryloRight = sam3.new Krylo(WRK, "правое");
+        Airplane.Wing wingRight = sam3.new Wing(WRK, "правое");
         System.out.println("Самолет: " + "Сухой Суперджет");
-        kryloLeft.showWeight();
-        kryloRight.showWeight();
-        System.out.println("Общий вес крыльев: " +(kryloLeft.getWeight() + kryloRight.getWeight()) + " кг");
+        wingLeft.showWeight();
+        wingRight.showWeight();
+        System.out.println("Общий вес крыльев: " +(wingLeft.getWeight() + wingRight.getWeight()) + " кг");
     }
 }

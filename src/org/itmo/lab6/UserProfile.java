@@ -2,22 +2,22 @@ package org.itmo.lab6;
 
 import java.util.Scanner;
 
-public class UserProfile {
-    protected Scanner scanner;
+public abstract class UserProfile {
+    protected static Scanner scanner;
 
     public UserProfile() {
         scanner = new Scanner(System.in);
     }
 
-      public int getAge() {
+    public String getInfoUser() {
         System.out.print("Введите ваш возраст: ");
-        return scanner.nextInt();
-    }
-    public String getName() {
-        System.out.print("Введите ваше имя: ");
-        scanner.nextLine(); // Очистка буфера
         return scanner.nextLine();
     }
 
+    public void displayUserInfo() {
+        String age = getInfoUser();
+        System.out.println("\nИнформация о пользователе:");
+        System.out.println("Возраст пользователя: " + age);
+    }
 
 }
