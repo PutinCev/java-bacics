@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Строим самолет:");
-        Airplane sam3 = new Airplane("Сухой Суперджет");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите вес левого крыла");
-        int WLK = scanner.nextInt();
-        Airplane.Wing wingLeft = sam3.new Wing(WLK, "левое");
+        int wl = scanner.nextInt();
         System.out.println("Введите вес правого крыла");
-        int WRK = scanner.nextInt();
-        Airplane.Wing wingRight = sam3.new Wing(WRK, "правое");
+        int wr = scanner.nextInt();
+        Airplane sam3 = new Airplane("Сухой Суперджет",wl,wr);
         System.out.println("Самолет: " + "Сухой Суперджет");
+        Airplane.Wing wingLeft = sam3.getLeftWing();
+        Airplane.Wing wingRight = sam3.getRightWing();
         wingLeft.showWeight();
         wingRight.showWeight();
         System.out.println("Общий вес крыльев: " +(wingLeft.getWeight() + wingRight.getWeight()) + " кг");

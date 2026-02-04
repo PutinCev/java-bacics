@@ -6,9 +6,19 @@ public class Airplane {
     private Wing leftWing;
     private Wing rightWing;
 
+    public Wing getLeftWing() {
+        return leftWing;
+    }
+
+    public Wing getRightWing() {
+        return rightWing;
+    }
+
     // Конструктор самолета
-    public Airplane(String model){
+    public Airplane(String model, int wl, int wr){
         this.model = model;
+        leftWing = new Wing(wl,"левое");
+        rightWing = new Wing(wr,"правое");
     }
 
     // Метод для отображения информации о самолете
